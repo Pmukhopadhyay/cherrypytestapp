@@ -1,0 +1,18 @@
+<%!
+import MySQLdb
+import MySQLdb.cursors
+db = MySQLdb.connect(host="localhost",user="vertexbusiness",passwd="password",db="vertexbusiness")
+cur = db.cursor()
+cur.execute("SELECT * FROM Device")
+col_names = [i[0] for i in cur.description]
+%>	
+<b>${col_names[1]} &nbsp;&nbsp;</b><br/>	
+% for row in cur.fetchall() :
+	%for i in xrange(1,len(col_names)): 
+		%if i==1:
+    		${row[i]} &nbsp;&nbsp;
+    	%endif
+    % endfor
+    <br/>
+% endfor
+</li>
